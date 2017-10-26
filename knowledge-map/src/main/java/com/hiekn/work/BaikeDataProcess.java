@@ -14,7 +14,7 @@ import java.io.File;
  *
  * @author xiaohuqi@126.com  2017/10/24
  **/
-public class BaikeData {
+public class BaikeDataProcess {
 
 	public static void main(String[] args) {
 
