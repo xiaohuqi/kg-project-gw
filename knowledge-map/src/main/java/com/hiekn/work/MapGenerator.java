@@ -16,7 +16,7 @@ public class MapGenerator {
 		new MapGenerator().process1();
 	}
 
-	public void process(String input, ICSegregation seg, Map<String, Double> idfMap){
+	public void process(String input, ICSegregation seg, Map<String, Double> idfMap, int outputSize){
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		List<String> wordList = seg.segregate2(input);
@@ -33,7 +33,7 @@ public class MapGenerator {
 			if(idfMap.containsKey(word)){
 				score = idfMap.get(word);
 			}
-			scoreMap.put(word, (1 + map.get(word) * Math.pow(score, 3) / 100000));
+			scoreMap.put(word, (1 + map.get(word) * Math.pow(score, 3) / 10000));
 		}
 
 
@@ -42,7 +42,7 @@ public class MapGenerator {
 		List<Double> valueList = new ArrayList<Double>();
 		mapSort.sortDoubleValueMap(scoreMap, keyList, valueList);
 
-		for(int i=0;i<keyList.size();i++){
+		for(int i=0;i<outputSize;i++){
 			if(valueList.get(i) < 1){
 				break;
 			}
@@ -52,14 +52,12 @@ public class MapGenerator {
 			}
 
 			List<String> longWordList = new ArrayList<String>();
-			for(int j=0;j<keyList.size();j++){
+			for(int j=0;j<outputSize*3;j++){
 				if(i == j){
 					continue;
 				}
 				if(keyList.get(j).contains(word)){
-					if(scoreMap.get(keyList.get(j)) > 0.5) {
-						longWordList.add(keyList.get(j));
-					}
+					longWordList.add(keyList.get(j));
 				}
 			}
 			System.out.print(word + "\t" + valueList.get(i) + "\t");

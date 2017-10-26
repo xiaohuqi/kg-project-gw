@@ -34,7 +34,7 @@ public class ZhinanDataProcess {
 		dicPathList.add("D:\\work\\guowang\\dic\\idf\\idf_1.dic");
 		Map<String, Double> idfMap = mapGenerator.readIdfDic(dicPathList);
 
-		JSONObject domainJsonObject = jsonArray.getJSONObject(1);
+		JSONObject domainJsonObject = jsonArray.getJSONObject(2);
 		JSONArray projectJSONArray = domainJsonObject.getJSONArray("projects");
 		StringBuilder sb = new StringBuilder();
 		for(int j=0;j<projectJSONArray.size();j++){
@@ -44,7 +44,7 @@ public class ZhinanDataProcess {
 					.append(projectJsonObject.getString("ketineirong")).append("\n");
 		}
 
-		mapGenerator.process(sb.toString(), seg, idfMap);
+		mapGenerator.process(sb.toString(), seg, idfMap, 100);
 	}
 
 	public static JSONArray extract(String inputFilePath) {
